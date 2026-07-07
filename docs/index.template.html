@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Microtuff Solutions — Client Portal</title>
+  <meta http-equiv="refresh" content="0; url=LIVE_URL_PLACEHOLDER" />
+  <style>
+    :root { --navy:#0a1c38; --gold:#f5c542; }
+    * { box-sizing: border-box; margin:0; padding:0; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+           background: linear-gradient(135deg,#0a1c38,#103a6e); color:#f8fafc;
+           min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px; }
+    .card { background:rgba(10,28,56,.85); border:1px solid var(--gold);
+            border-radius:18px; padding:40px; max-width:520px; width:100%;
+            text-align:center; box-shadow:0 20px 60px rgba(0,0,0,.45); }
+    h1 { color:var(--gold); font-size:1.7rem; margin-bottom:6px; }
+    .sub { color:#cbd5e1; margin-bottom:24px; font-size:.95rem; }
+    .btn { display:inline-block; background:var(--gold); color:#0a1c38; font-weight:700;
+           text-decoration:none; padding:14px 28px; border-radius:12px; font-size:1rem;
+           transition:transform .1s ease; }
+    .btn:hover { transform:translateY(-2px); }
+    .meta { margin-top:22px; font-size:.8rem; color:#94a3b8; }
+    code { background:rgba(245,197,66,.12); color:var(--gold); padding:2px 6px; border-radius:6px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Microtuff Solutions</h1>
+    <p class="sub">Secure Client Document Portal</p>
+    <p style="margin-bottom:24px;color:#e2e8f0;line-height:1.5">
+      Opening the portal&hellip; if you are not redirected automatically, use the button below.
+    </p>
+    <a class="btn" href="LIVE_URL_PLACEHOLDER">Open Client Portal</a>
+    <p class="meta">
+      Source: <a href="https://github.com/kronodin/microtuff-client-portal" style="color:var(--gold)">github.com/kronodin/microtuff-client-portal</a><br/>
+      Live server URL rotates — this page always redirects to the current one.
+    </p>
+  </div>
+  <script>
+    // Hard redirect on load (covers meta-refresh edge cases)
+    window.location.replace("LIVE_URL_PLACEHOLDER");
+  </script>
+</body>
+</html>
