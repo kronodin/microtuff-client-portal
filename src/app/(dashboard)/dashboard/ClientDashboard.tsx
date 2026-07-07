@@ -16,6 +16,7 @@ interface UploadItem {
   description: string | null
   type: string
   status: string
+  thumbnail: string | null
   createdAt: string
 }
 
@@ -89,7 +90,14 @@ export default function ClientDashboard({
   })
 
   const fmtSize = (b: number) => (b < 1024 * 1024 ? `${Math.round(b / 1024)} KB` : `${(b / 1024 / 1024).toFixed(1)} MB`)
-  const thumb = (u: UploadItem) => (u.type === 'image' ? `/api/uploads/${u.id}` : u.type === 'video' ? '🎬' : '📄')
+  const thumb = (u: UploadItem) =>
+    u.type === 'image'
+      ? `/api/uploads/${u.id}`
+      : u.type === 'video'
+      ? u.thumbnail
+        ? `/api/uploads/${u.id}?thumb=1`
+        : '🎬'
+      : '📄'
 
   return (
     <div className="space-y-6">

@@ -25,9 +25,10 @@ model Upload {
   originalName String
   mimeType    String
   size        Int
+  type        String
   category    String   @default("Other")
   description String?
-  type        String // 'document' | 'image' | 'video'
+  thumbnail   String?
   status      String   @default("uploaded")
   createdAt   DateTime @default(now())
 

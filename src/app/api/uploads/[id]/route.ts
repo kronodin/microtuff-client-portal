@@ -19,9 +19,22 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
 
   const user = await prisma.user.findUnique({ where: { id: payload.userId } })
   const clientDir = clientDirFor(user?.phone || payload.userId)
+
+  const url = new URL(req.url)
+  const wantThumb = url.searchParams.get('thumb') === '1'
+  if (wantThumb && upload.thumbnail) {
+    try {
+      const data = await fs.readFile(path.join(clientDir, upload.thumbnail))
+      return new NextResponse(data, {
+        headers: { 'Content-Type': 'image/jpeg', 'Cache-Control': 'private, max-age=3600' },
+      })
+    } catch {
+      /* fall through to main file */
+    }
+  }
+
   try {
     const data = await fs.readFile(path.join(clientDir, upload.filename))
-    const url = new URL(req.url)
     const disposition = url.searchParams.get('download') ? 'attachment' : 'inline'
     return new NextResponse(data, {
       headers: {

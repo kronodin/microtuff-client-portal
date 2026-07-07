@@ -5,8 +5,30 @@ import { prisma } from '@/lib/prisma'
 import { classifyFile, sanitizeFilename, clientDirFor, ALLOWED } from '@/lib/files'
 import fs from 'fs/promises'
 import path from 'path'
+import { spawn } from 'child_process'
 
 const BASE_UPLOAD_DIR = path.resolve(process.env.UPLOAD_DIR || './uploads')
+
+// Generate a video thumbnail with ffmpeg (graceful if ffmpeg missing).
+async function makeVideoThumbnail(clientDir: string, videoFile: string): Promise<string | null> {
+  try {
+    const ffmpeg = process.env.FFMPEG_PATH || 'ffmpeg'
+    const thumb = videoFile.replace(/\.[^.]+$/, '.jpg')
+    await new Promise<void>((resolve) => {
+      const p = spawn(ffmpeg, [
+        '-y', '-i', path.join(clientDir, videoFile),
+        '-ss', '00:00:00.1', '-vframes', '1',
+        '-vf', 'scale=480:-1',
+        path.join(clientDir, thumb),
+      ])
+      p.on('close', () => resolve())
+    })
+    const stat = await fs.stat(path.join(clientDir, thumb)).catch(() => null)
+    return stat ? thumb : null
+  } catch {
+    return null
+  }
+}
 
 export async function POST(req: Request) {
   const token = (await cookies()).get('mt_session')?.value
@@ -45,6 +67,12 @@ export async function POST(req: Request) {
   const storedName = `${Date.now()}-${safeName}`
   await fs.writeFile(path.join(clientDir, storedName), buffer)
 
+  // Video thumbnail (best-effort)
+  let thumbnail: string | null = null
+  if (type === 'video') {
+    thumbnail = await makeVideoThumbnail(clientDir, storedName)
+  }
+
   const upload = await prisma.upload.create({
     data: {
       userId: payload.userId,
@@ -55,6 +83,7 @@ export async function POST(req: Request) {
       category,
       description: description.slice(0, 500) || null,
       type,
+      thumbnail,
     },
   })
 
