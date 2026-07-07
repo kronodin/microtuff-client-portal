@@ -16,8 +16,8 @@ export default async function DashboardLayout({ children }: { children: React.Re
       <header className="bg-gradient-to-r from-navy-900 via-navy-800 to-navy-700 border-b-2 border-gold-500 sticky top-0 z-20">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-gold-500 to-gold-400 flex items-center justify-center font-black text-navy-900 text-lg">
-              M
+            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-gold-500 to-gold-400 p-1 flex items-center justify-center">
+              <img src="/microtuff-logo.png" alt="Microtuff Solutions" className="w-full h-full object-contain" />
             </div>
             <div>
               <div className="font-extrabold text-gold-500 text-base leading-none">MICROTUFF SOLUTIONS</div>

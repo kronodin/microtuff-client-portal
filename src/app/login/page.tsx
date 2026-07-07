@@ -41,8 +41,8 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center px-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <div className="mx-auto w-12 h-12 rounded-xl bg-gradient-to-br from-gold-500 to-gold-400 flex items-center justify-center font-black text-navy-900 text-2xl mb-3">
-            M
+          <div className="mx-auto w-16 h-16 rounded-xl bg-gradient-to-br from-gold-500 to-gold-400 p-1.5 mb-3 flex items-center justify-center">
+            <img src="/microtuff-logo.png" alt="Microtuff Solutions" className="w-full h-full object-contain" />
           </div>
           <CardTitle className="text-2xl">Microtuff Client Portal</CardTitle>
           <p className="text-sm text-slate-400 mt-1">Enter your phone number to sign in</p>
