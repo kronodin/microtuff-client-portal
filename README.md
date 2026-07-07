@@ -66,11 +66,12 @@ to add real clients (phone + name). Each client automatically gets an isolated
 
 ### Sample logins (from seed)
 ```
-+18768851041  Nash Tech        (admin)
-+15559876543  Natoya Daley
-+18765551234  Garlands Wholesale
++18768851041  Nash Tech        (client — can upload to own folder)
++15559876543  Natoya Daley     (client)
++18765551234  Garlands Wholesale (client)
 ```
-In the login form you can type `8768851041` (10 digits) and it auto-prepends +1.
+In the login form type your own client phone (10 digits) and it auto-prepends +1.
+Admin access is granted to the phone set in `ADMIN_PHONE` in `.env`.
 
 ## Project Structure
 

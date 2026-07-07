@@ -54,7 +54,7 @@ export default function LoginPage() {
               <Input
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                placeholder="+1 876 885 1041"
+                placeholder="Your phone number"
                 inputMode="tel"
                 className="mt-1"
               />
@@ -65,7 +65,7 @@ export default function LoginPage() {
             </Button>
           </form>
           <div className="mt-4 text-xs text-slate-500 text-center">
-            Demo: Nash Tech → 8768851041
+            Authorized clients only. Contact Microtuff for access.
           </div>
         </CardContent>
       </Card>
