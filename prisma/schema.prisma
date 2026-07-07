@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  phone     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+  isAdmin   Boolean  @default(false)
+  uploads   Upload[]
+  messages  Message[]
+}
+
+model Upload {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  filename    String
+  originalName String
+  mimeType    String
+  size        Int
+  category    String   @default("Other")
+  description String?
+  type        String // 'document' | 'image' | 'video'
+  status      String   @default("uploaded")
+  createdAt   DateTime @default(now())
+
+  @@index([userId])
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  body      String?  // text content (null for voice notes)
+  voiceFile String?  // stored filename for voice note (null for text)
+  from      String   @default("client") // 'client' | 'admin'
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
