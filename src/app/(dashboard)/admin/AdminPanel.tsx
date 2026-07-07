@@ -107,8 +107,7 @@ export default function AdminPanel({
           <CardHeader><CardTitle>Add Client</CardTitle></CardHeader>
           <CardContent>
             <form onSubmit={addUser} className="grid grid-cols-1 sm:grid-cols-4 gap-3">
-              <Input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone (e.g. +18765551234)" />
-              <Input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone (e.g. +18765551234)" />
+              <Input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone (e.g. +187****1234)" />
               <label className="flex items-center gap-2 text-sm text-slate-300">
                 <input type="checkbox" checked={isAdmin} onChange={(e) => setIsAdmin(e.target.checked)} /> Admin
               </label>
